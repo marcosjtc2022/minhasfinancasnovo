@@ -13,6 +13,7 @@ import com.marcosjtc.minhasfinancasnovo.model.entity.repository.UsuarioRepositor
 import com.marcosjtc.minhasfinancasnovo.service.UsuarioService;
 
 //Informa ao contêiner do spring o tipo de instância a ser gerenciado.
+//Não precisa do autowired, pois, tem tambémo oconstrutor.
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -56,6 +57,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 			throw new RegraNegocioException("Já existe um usuário cadastrado com este email. ");
 		}
 		
+	}
+
+	@Override
+	public Optional<Usuario> obterPorId(Long id) {
+		return repository.findById(id);
 	}
 
 }

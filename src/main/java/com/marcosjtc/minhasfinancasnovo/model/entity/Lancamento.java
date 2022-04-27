@@ -36,6 +36,9 @@ public class Lancamento {
 	@Column(name = "ano")
 	private Integer ano;
 	
+	@Column(name = "mes")
+	private Integer mes;
+
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
@@ -118,10 +121,18 @@ public class Lancamento {
 	public void setStatus(StatusLancamento status) {
 		this.status = status;
 	}
+	
+	public Integer getMes() {
+		return mes;
+	}
+
+	public void setMes(Integer mes) {
+		this.mes = mes;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ano, dataCadastro, descricao, id, status, tipo, usuario, valor);
+		return Objects.hash(ano, dataCadastro, descricao, id, mes, status, tipo, usuario, valor);
 	}
 
 	@Override
@@ -134,14 +145,34 @@ public class Lancamento {
 			return false;
 		Lancamento other = (Lancamento) obj;
 		return Objects.equals(ano, other.ano) && Objects.equals(dataCadastro, other.dataCadastro)
-				&& Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id) && status == other.status
-				&& tipo == other.tipo && Objects.equals(usuario, other.usuario) && Objects.equals(valor, other.valor);
+				&& Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id)
+				&& Objects.equals(mes, other.mes) && status == other.status && tipo == other.tipo
+				&& Objects.equals(usuario, other.usuario) && Objects.equals(valor, other.valor);
 	}
 
 	@Override
 	public String toString() {
-		return "Lancamento [id=" + id + ", descricao=" + descricao + ", ano=" + ano + ", usuario=" + usuario
-				+ ", valor=" + valor + ", dataCadastro=" + dataCadastro + ", tipo=" + tipo + ", status=" + status + "]";
+		return "Lancamento [id=" + id + ", descricao=" + descricao + ", ano=" + ano + ", mes=" + mes + ", usuario="
+				+ usuario + ", valor=" + valor + ", dataCadastro=" + dataCadastro + ", tipo=" + tipo + ", status="
+				+ status + "]";
+	}
+
+	public Lancamento(Long id, String descricao, Integer ano, Integer mes, Usuario usuario, BigDecimal valor,
+			LocalDate dataCadastro, TipoLancamento tipo, StatusLancamento status) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.ano = ano;
+		this.mes = mes;
+		this.usuario = usuario;
+		this.valor = valor;
+		this.dataCadastro = dataCadastro;
+		this.tipo = tipo;
+		this.status = status;
+	}
+
+	public Lancamento() {
+		
 	}
 	
 	

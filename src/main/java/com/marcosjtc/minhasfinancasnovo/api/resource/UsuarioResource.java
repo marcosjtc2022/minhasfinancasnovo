@@ -38,6 +38,8 @@ public class UsuarioResource {
 	
 	//@RequestBody - Inofmra ao objeto Json que os dados que vêm da requisição 
 	// referentes ao usuário, sejam transformados no objeto UsuarioDTO
+	//Quando usa o @PostMapping pode retornar o responseentity "ok",
+	//como o created.
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody UsuarioDTO dto ) {
 		
