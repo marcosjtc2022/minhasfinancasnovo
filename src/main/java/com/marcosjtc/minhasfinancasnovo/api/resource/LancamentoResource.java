@@ -90,7 +90,7 @@ public class LancamentoResource {
 	//Json será convertido em DTO
 	//@PostMapping é a raiz. Usado para salvar recurso no servidor.
 	//Quando usa o @PostMapping pode retornar o responseentity "ok",
-	//como o created.
+	//assim como o created.
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody LancamentoDTO dto) {
 	  try {

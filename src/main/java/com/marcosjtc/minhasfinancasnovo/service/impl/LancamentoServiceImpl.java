@@ -15,6 +15,7 @@ import com.marcosjtc.minhasfinancasnovo.exception.RegraNegocioException;
 import com.marcosjtc.minhasfinancasnovo.model.entity.Lancamento;
 import com.marcosjtc.minhasfinancasnovo.model.entity.repository.LancamentoRepository;
 import com.marcosjtc.minhasfinancasnovo.model.enums.StatusLancamento;
+import com.marcosjtc.minhasfinancasnovo.model.enums.TipoLancamento;
 import com.marcosjtc.minhasfinancasnovo.service.LancamentoService;
 
 @Service
@@ -105,6 +106,23 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Override
 	public Optional<Lancamento> obterPorId(Long id) {
 		return repository.findById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public BigDecimal obterSaldoPorUsuario(Long id) {
+		BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.RECEITA.name());
+		BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.DESPESA.name());
+		
+		if(receitas == null) {
+			receitas = BigDecimal.ZERO;
+		}
+		
+		if(despesas == null) {
+			despesas = BigDecimal.ZERO;
+		}
+		
+		return receitas.subtract(despesas);
 	}
 
 }
