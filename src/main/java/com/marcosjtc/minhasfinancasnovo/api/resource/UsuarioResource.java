@@ -3,6 +3,7 @@ package com.marcosjtc.minhasfinancasnovo.api.resource;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ import com.marcosjtc.minhasfinancasnovo.service.UsuarioService;
 public class UsuarioResource {
 	
 	private UsuarioService service;
+	
+	@Autowired
 	private LancamentoService lancamentoService;
 	
 	public UsuarioResource(UsuarioService service ) {

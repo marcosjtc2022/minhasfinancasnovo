@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.marcosjtc.minhasfinancasnovo.exception.RegraNegocioException;
 import com.marcosjtc.minhasfinancasnovo.model.entity.Lancamento;
+import com.marcosjtc.minhasfinancasnovo.model.entity.Usuario;
 import com.marcosjtc.minhasfinancasnovo.model.entity.repository.LancamentoRepository;
 import com.marcosjtc.minhasfinancasnovo.model.enums.StatusLancamento;
 import com.marcosjtc.minhasfinancasnovo.model.enums.TipoLancamento;
@@ -111,8 +112,12 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Override
 	@Transactional(readOnly = true)
 	public BigDecimal obterSaldoPorUsuario(Long id) {
-		BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.RECEITA.name());
-		BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.DESPESA.name());
+		
+		Usuario usuario = new Usuario();
+		usuario.setId(id);
+		
+		BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuario(usuario, TipoLancamento.RECEITA);
+		BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuario(usuario, TipoLancamento.DESPESA);
 		
 		if(receitas == null) {
 			receitas = BigDecimal.ZERO;
