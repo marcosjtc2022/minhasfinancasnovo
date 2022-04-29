@@ -12,6 +12,10 @@ public class UsuarioDTO {
 		this.senha = senha;
 	}
 	
+	public UsuarioDTO() {
+		
+	}
+	
 	public String getEmail() {
 		return email;
 	}
