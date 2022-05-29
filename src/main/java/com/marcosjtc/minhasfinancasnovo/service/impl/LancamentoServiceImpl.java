@@ -30,7 +30,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 	
 	@Override
 	@Transactional //Abre uma transação. Ao final se ocorrer tudo bem faz commit.
-	//No caso de erro fa rollback.
+	//No caso de erro faz rollback.
 	public Lancamento salvar(Lancamento lancamento) {
 		validar(lancamento);
 		lancamento.setStatus(StatusLancamento.PENDENTE);

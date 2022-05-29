@@ -87,6 +87,13 @@ public class LancamentoResource {
 	    new ResponseEntity("Lançamento não encontrado na base de dados.", HttpStatus.BAD_REQUEST));
 	}
 	
+	@GetMapping("{id}")
+	public ResponseEntity obterLancamento( @PathVariable("id") Long id ) {
+		return service.obterPorId(id)
+			   .map( lancamento -> new ResponseEntity(converter(lancamento), HttpStatus.OK))
+			   .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+	}
+	
 	//Json será convertido em DTO
 	//@PostMapping é a raiz. Usado para salvar recurso no servidor.
 	//Quando usa o @PostMapping pode retornar o responseentity "ok",
@@ -135,6 +142,22 @@ public class LancamentoResource {
 				    new ResponseEntity("Lançamento não encontrado na base de dados.", HttpStatus.BAD_REQUEST));
 		
 		
+	}
+	
+	private LancamentoDTO converter(Lancamento lancamento) {
+		LancamentoDTO lancamentoDto = new LancamentoDTO();
+		lancamentoDto.setId(lancamento.getId());
+		lancamentoDto.setDescricao(lancamento.getDescricao());
+		lancamentoDto.setValor(lancamento.getValor());
+		lancamentoDto.setMes(lancamento.getMes());
+		lancamentoDto.setAno(lancamento.getAno());
+		lancamentoDto.setStatus(lancamento.getStatus().name());
+		lancamentoDto.setTipo(lancamento.getTipo().name());
+		lancamentoDto.setUsuario(lancamento.getUsuario().getId());
+		
+		
+		
+		return lancamentoDto;
 	}
 	
 	//Converte DTO em uma entidade JPA.
