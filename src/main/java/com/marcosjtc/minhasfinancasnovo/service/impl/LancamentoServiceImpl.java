@@ -116,8 +116,8 @@ public class LancamentoServiceImpl implements LancamentoService {
 		Usuario usuario = new Usuario();
 		usuario.setId(id);
 		
-		BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuario(usuario, TipoLancamento.RECEITA);
-		BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuario(usuario, TipoLancamento.DESPESA);
+		BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuarioEStatus(usuario, TipoLancamento.RECEITA, StatusLancamento.EFETIVADO);
+		BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuarioEStatus(usuario, TipoLancamento.DESPESA, StatusLancamento.EFETIVADO);
 		
 		if(receitas == null) {
 			receitas = BigDecimal.ZERO;
