@@ -19,6 +19,7 @@ public class MinhasfinancasnovoApplication implements WebMvcConfigurer {
 		
 	}
 	
+	
 /*	@Configuration
 	public class CorsConfiguration implements WebMvcConfigurer {
 
